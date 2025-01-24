@@ -1,0 +1,9 @@
+bin/
+obj/
+*.user
+*.suo
+*.sln
+*.nupkg
+*.csproj.user
+*.vs/
+_ReSharper*/
