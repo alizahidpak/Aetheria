@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   backend:
-    build: ./backend
+    build: ./backend/Aetheria.Api
     ports:
       - "5000:5000"
     environment:
@@ -13,20 +13,24 @@ services:
       - db
       - redis
       - rabbitmq
-    volumes:
-      - ./backend:/app
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend/aetheria.webapp
+      target: dev
+    command: yarn dev
     ports:
       - "3000:3000"
     environment:
+      - NODE_ENV=development
       - NEXT_PUBLIC_API_BASE_URL=http://localhost:5000/api
+      - WATCHPACK_POLLING=true
     depends_on:
       - backend
     volumes:
-      - ./frontend:/app
-      - pnpm-store:/app/node_modules/.pnpm-store
+      - ./frontend/aetheria.webapp:/app
+      - /app/node_modules
+      - /app/.next
 
   db:
     image: postgres:17-alpine
@@ -45,7 +49,7 @@ services:
       - "6379:6379"
 
   rabbitmq:
-    image: rabbitmq:3-management-alpine
+    image: rabbitmq:management-alpine
     ports:
       - "5672:5672"
       - "15672:15672"
