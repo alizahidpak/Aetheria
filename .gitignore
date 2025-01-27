@@ -9,19 +9,6 @@
 *.vs/
 _ReSharper*/
 
-# Node.js ignore
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug/
-.pnpm-store/
-.yarn/*
-.npm/*
-.pnpm-lock.yaml
-yarn.lock
-package-lock.json
-
 # General ignore
 .DS_Store
 Thumbs.db
